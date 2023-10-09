@@ -4,6 +4,8 @@ import { EmployeeMerged, EmployeeResponse } from "@/interfaces/employee";
 import { employees } from "@/utility/config";
 import { loginAndGetPunches, prepareLoginPayload } from "@/utility/employee";
 
+export const dynamic = "force-dynamic";
+
 async function getData() {
   const promises = employees.map(prepareLoginPayload).map(loginAndGetPunches);
 
@@ -29,10 +31,12 @@ export default async function Home() {
 
   return (
     <>
-      <Navbar />      
+      <Navbar />
       <main className="my-16 px-4 max-w-6xl mx-auto">
         <h2 className="mb-4 text-center font-black text-4xl bg-clip-text text-transparent bg-gradient-to-r from-lime-400 to-indigo-700">
-          {new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(new Date())}
+          {new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(
+            new Date()
+          )}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {data.map((emp) => (
