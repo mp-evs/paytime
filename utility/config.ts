@@ -35,7 +35,7 @@ export const employees: Employee[] = [
     username: "1032",
     password: "emp123",
     displayName: "Mit P ¯\\_(-_-)_/¯",
-    avatar: 'https://api.dicebear.com/6.x/adventurer/svg?seed=Midnight',
+    avatar: "https://api.dicebear.com/6.x/adventurer/svg?seed=Midnight",
     preference: {
       withLunch: true,
       maxBreakInMinutes: 45,
@@ -78,15 +78,6 @@ export const employees: Employee[] = [
     },
   },
   {
-    username: "1038",
-    password: "0423",
-    displayName: "Smit Bhaliya",
-    preference: {
-      withLunch: false,
-      maxBreakInMinutes: 75,
-    },
-  },
-  {
     username: "1036",
     password: "emp123",
     displayName: "Shreya Vyas",
@@ -102,6 +93,15 @@ export const employees: Employee[] = [
     preference: {
       withLunch: false,
       maxBreakInMinutes: 75,
+    },
+  },
+  {
+    username: "1042",
+    password: "es@123",
+    displayName: "Bhaumik Patel",
+    preference: {
+      withLunch: true,
+      maxBreakInMinutes: 45,
     },
   },
 ];
