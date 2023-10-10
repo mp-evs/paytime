@@ -19,6 +19,16 @@ function getNameInitials(name: string) {
 }
 
 const Avatar: React.FC<AvatarProps> = ({ src, name, isOnline }) => {
+  const tooltipComp = isOnline ? (
+    <div className="absolute rounded-full right-2 bottom-2 w-4 h-4 bg-sky-400">
+      <div className="group relative w-full h-full">
+        <span className="text-gray-600 dark:text-white border border-slate-900/10 shadow-lg dark:border-0 dark:bg-slate-900/75 pointer-events-none absolute left-6 w-max rounded px-2 py-1 text-sm font-medium opacity-0 transition-opacity group-hover:opacity-100">
+          Online
+        </span>
+      </div>
+    </div>
+  ) : null;
+
   if (src) {
     return (
       <div className="relative">
@@ -30,9 +40,7 @@ const Avatar: React.FC<AvatarProps> = ({ src, name, isOnline }) => {
           alt="avatar"
           priority
         />
-        {isOnline && (
-          <div className="absolute rounded-full right-2 bottom-2 w-4 h-4 bg-sky-400" title="Online" />
-        )}
+        {tooltipComp}
       </div>
     );
   }
@@ -41,9 +49,7 @@ const Avatar: React.FC<AvatarProps> = ({ src, name, isOnline }) => {
       <span className="text-5xl font-bold text-gray-600 dark:text-gray-300">
         {getNameInitials(name)}
       </span>
-      {isOnline && (
-        <div className="absolute rounded-full right-2 bottom-2 w-4 h-4 bg-sky-400" title="Online" />
-      )}
+      {tooltipComp}
     </div>
   );
 };

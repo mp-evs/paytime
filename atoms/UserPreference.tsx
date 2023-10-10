@@ -7,19 +7,18 @@ interface UserPreferenceProps {
 const UserPreference: React.FC<UserPreferenceProps> = ({ prefersLunch }) => {
   return (
     <div className="flex gap-2 justify-center">
-      <p
-        title="Total allocated break time in minutes."
-        className="w-8 h-8 leading-8 text-purple-700 bg-purple-200 dark:text-white dark:bg-purple-700 rounded-full text-xs font-bold text-center align-middle"
-      >
+      <p className="w-8 h-8 group relative leading-8 text-purple-700 bg-purple-200 dark:text-white dark:bg-purple-700 rounded-full text-xs font-bold text-center align-middle">
         {prefersLunch ? "45m" : "75m"}
+        <span className="z-40 border text-gray-600 dark:text-white bg-white border-slate-900/10 shadow-lg dark:border-0 dark:bg-slate-900 pointer-events-none absolute top-10 -left-28 w-max rounded px-2 py-1 text-sm font-medium opacity-0 transition-opacity group-hover:opacity-100">
+          Total allocated break time in minutes.
+        </span>
       </p>
 
       {prefersLunch && (
-        <div
-          title={
-            prefersLunch ? "Opted for with lunch" : "Opted for without lunch"
-          }
-        >
+        <div className="group relative">
+          <span className="z-40 border text-gray-600 dark:text-white bg-white border-slate-900/10 shadow-lg dark:border-0 dark:bg-slate-900 pointer-events-none absolute top-10 -left-16 w-max rounded px-2 py-1 text-sm font-medium opacity-0 transition-opacity group-hover:opacity-100">
+            {prefersLunch ? "Opted for with lunch" : "Opted for without lunch"}
+          </span>
           <svg
             fill="currentColor"
             className="w-8 h-8 text-amber-700 dark:text-amber-500 rounded-full p-0.5"
