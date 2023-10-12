@@ -28,8 +28,8 @@ const CheckInLine: React.FC<CheckInLineProps> = ({ initialDifference }) => {
   }
 
   return (
-    <div className={`${bgClasses} w-full py-1 flex items-center justify-center`}>
-      <svg className={`${textClasses} dark:text-white h-6 w-6`} viewBox="0 0 24 24" fill="none">
+    <div className={`${bgClasses} flex w-full items-center justify-center py-1`}>
+      <svg className={`${textClasses} h-6 w-6 dark:text-white`} viewBox="0 0 24 24" fill="none">
         <g strokeWidth="0"></g>
         <g strokeLinecap="round" strokeLinejoin="round"></g>
         <g>
@@ -42,7 +42,7 @@ const CheckInLine: React.FC<CheckInLineProps> = ({ initialDifference }) => {
           ></path>
         </g>
       </svg>
-      <p className={`${textClasses} dark:text-white ml-2 font-semibold`}>{content}</p>
+      <p className={`${textClasses} ml-2 font-semibold dark:text-white`}>{content}</p>
     </div>
   );
 };

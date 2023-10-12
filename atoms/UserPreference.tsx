@@ -6,22 +6,22 @@ interface UserPreferenceProps {
 
 const UserPreference: React.FC<UserPreferenceProps> = ({ prefersLunch }) => {
   return (
-    <div className="flex gap-2 justify-center">
-      <p className="w-8 h-8 group relative leading-8 text-purple-700 bg-purple-200 dark:text-white dark:bg-purple-700 rounded-full text-xs font-bold text-center align-middle">
+    <div className="flex justify-center gap-2">
+      <p className="group relative h-8 w-8 rounded-full bg-purple-200 text-center align-middle text-xs font-bold leading-8 text-purple-700 dark:bg-purple-700 dark:text-white">
         {prefersLunch ? "45m" : "75m"}
-        <span className="z-40 border text-gray-600 dark:text-white bg-white border-slate-900/10 shadow-lg dark:border-0 dark:bg-slate-900 pointer-events-none absolute top-10 -left-28 w-max rounded px-2 py-1 text-sm font-medium opacity-0 transition-opacity group-hover:opacity-100">
+        <span className="pointer-events-none absolute -left-28 top-10 z-40 w-max rounded border border-slate-900/10 bg-white px-2 py-1 text-sm font-medium text-gray-600 opacity-0 shadow-lg transition-opacity group-hover:opacity-100 dark:border-0 dark:bg-slate-900 dark:text-white">
           Total allocated break time in minutes.
         </span>
       </p>
 
       {prefersLunch && (
         <div className="group relative">
-          <span className="z-40 border text-gray-600 dark:text-white bg-white border-slate-900/10 shadow-lg dark:border-0 dark:bg-slate-900 pointer-events-none absolute top-10 -left-16 w-max rounded px-2 py-1 text-sm font-medium opacity-0 transition-opacity group-hover:opacity-100">
+          <span className="pointer-events-none absolute -left-16 top-10 z-40 w-max rounded border border-slate-900/10 bg-white px-2 py-1 text-sm font-medium text-gray-600 opacity-0 shadow-lg transition-opacity group-hover:opacity-100 dark:border-0 dark:bg-slate-900 dark:text-white">
             {prefersLunch ? "Opted for with lunch" : "Opted for without lunch"}
           </span>
           <svg
             fill="currentColor"
-            className="w-8 h-8 text-amber-700 dark:text-amber-500 rounded-full p-0.5"
+            className="h-8 w-8 rounded-full p-0.5 text-amber-700 dark:text-amber-500"
             viewBox="0 0 512 512"
           >
             <g strokeWidth="0"></g>

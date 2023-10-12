@@ -1,11 +1,7 @@
 const NoRecords = () => {
   return (
-    <div className="border-t h-[199px] border-slate-900/10 dark:border-slate-300/10 w-full py-10 bg-amber-50 dark:bg-transparent rounded-b-2xl flex gap-4 flex-col items-center justify-center">
-      <svg
-        className="h-20 w-20 text-amber-700 dark:text-amber-400"
-        viewBox="0 0 24 24"
-        fill="none"
-      >
+    <div className="flex h-[199px] w-full flex-col items-center justify-center gap-4 rounded-b-2xl border-t border-slate-900/10 bg-amber-50 py-10 dark:border-slate-300/10 dark:bg-transparent">
+      <svg className="h-20 w-20 text-amber-700 dark:text-amber-400" viewBox="0 0 24 24" fill="none">
         <g strokeWidth="0"></g>
         <g strokeLinecap="round" strokeLinejoin="round"></g>
         <g>
@@ -27,9 +23,7 @@ const NoRecords = () => {
           ></path>
         </g>
       </svg>
-      <p className="font-bold text-amber-700 dark:text-amber-400">
-        No entries for today!
-      </p>
+      <p className="font-bold text-amber-700 dark:text-amber-400">No entries for today!</p>
     </div>
   );
 };

@@ -3,10 +3,7 @@ import { EmployeeMerged } from "@/interfaces/employee";
 
 export const login = async (data: any) => {
   try {
-    const result = await axios.post(
-      "http://paytime.mantratecapp.com/UserForms/Login.aspx/LoginUser",
-      data
-    );
+    const result = await axios.post("http://paytime.mantratecapp.com/UserForms/Login.aspx/LoginUser", data);
     const cookie = result.headers["set-cookie"] || null;
     return cookie;
   } catch (e: any) {
@@ -71,9 +68,9 @@ export const addMinutesToTime = (t: string, mins: number) => {
 
   const period = totalMinutes < 720 ? "AM" : "PM";
 
-  const updatedTime = `${updatedHours
+  const updatedTime = `${updatedHours.toString().padStart(2, "0")}:${updatedMinutes
     .toString()
-    .padStart(2, "0")}:${updatedMinutes.toString().padStart(2, "0")} ${period}`;
+    .padStart(2, "0")} ${period}`;
 
   return updatedTime;
 };
@@ -133,8 +130,7 @@ export const getEmployeeStats = (emp: EmployeeMerged) => {
     remaining: remaining > 0 ? remaining : 0,
     used,
     usedPercentage: Math.round((used / available) * 100),
-    remainingPercentage:
-      remaining > 0 ? Math.round((remaining / available) * 100) : 0,
+    remainingPercentage: remaining > 0 ? Math.round((remaining / available) * 100) : 0,
     overtimeMins: remaining > 0 ? 0 : Math.abs(remaining),
   };
   console.log(res);

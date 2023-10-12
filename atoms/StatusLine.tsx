@@ -8,20 +8,12 @@ interface StatusLineProps {
 const StatusLine: React.FC<StatusLineProps> = ({ extraMins }) => {
   let content = addMinutesToTime("20:30", extraMins);
 
-  let bgClasses = extraMins
-    ? "bg-red-100 dark:bg-red-500/50"
-    : "bg-blue-100 dark:bg-blue-500/50";
+  let bgClasses = extraMins ? "bg-red-100 dark:bg-red-500/50" : "bg-blue-100 dark:bg-blue-500/50";
   let textClasses = extraMins ? "text-red-700" : "text-blue-700";
 
   return (
-    <div
-      className={`${bgClasses} mt-2 flex justify-center rounded-b-2xl py-0.5 dark:text-white w-full`}
-    >
-      <svg
-        viewBox="0 0 24 24"
-        className={`h-6 w-6 ${textClasses} dark:text-white`}
-        fill="none"
-      >
+    <div className={`${bgClasses} mt-2 flex w-full justify-center rounded-b-2xl py-0.5 dark:text-white`}>
+      <svg viewBox="0 0 24 24" className={`h-6 w-6 ${textClasses} dark:text-white`} fill="none">
         <g strokeWidth="0"></g>
         <g strokeLinecap="round" strokeLinejoin="round"></g>
         <g>

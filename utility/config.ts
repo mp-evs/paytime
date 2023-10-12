@@ -34,7 +34,7 @@ export const employees: Employee[] = [
   {
     username: "1032",
     password: "emp123",
-    displayName: "Mit P ¯\\_(-_-)_/¯",
+    displayName: "Mit Pancholi",
     avatar: "https://api.dicebear.com/6.x/adventurer/svg?seed=Midnight",
     preference: {
       withLunch: true,

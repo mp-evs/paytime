@@ -1,9 +1,11 @@
 {
-  "name": "Paytime",
+  "name": "paytime",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "format": "prettier --check --ignore-path .gitignore .",
+    "format:fix": "prettier --write --ignore-path .gitignore .",
+    "dev": "npm run format:fix && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -23,7 +25,10 @@
     "autoprefixer": "^10",
     "eslint": "^8",
     "eslint-config-next": "13.5.4",
+    "eslint-config-prettier": "^9.0.0",
     "postcss": "^8",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.5",
     "tailwindcss": "^3",
     "typescript": "^5"
   }

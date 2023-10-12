@@ -20,13 +20,13 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="sticky top-0 z-40 bg-white dark:bg-slate-900 w-full p-3 flex justify-between items-center border-b border-slate-900/10 dark:border-slate-300/10">
-      <h1 className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-orange-400 font-extrabold">
+    <nav className="sticky top-0 z-40 flex w-full items-center justify-between border-b border-slate-900/10 bg-white p-3 dark:border-slate-300/10 dark:bg-slate-900">
+      <h1 className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-3xl font-extrabold text-transparent">
         Paytime
       </h1>
       <button
         title={theme == "light" ? "Go Dark" : "Go Light"}
-        className="p-2 transition duration-150 ease-in-out hover:scale-110 rounded-xl bg-sky-100 dark:bg-slate-800"
+        className="rounded-xl bg-sky-100 p-2 transition duration-150 ease-in-out hover:scale-110 dark:bg-slate-800"
         onClick={toggleTheme}
       >
         {theme == "light" ? (
