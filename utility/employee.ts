@@ -122,15 +122,24 @@ export const getEmployeeStats = (emp: EmployeeMerged) => {
     remaining -= initialDiff;
   }
 
+  let usedPercentage = Math.round((used / available) * 100);
+  let remainingPercentage = Math.round((remaining / available) * 100);
+  if (usedPercentage > 100) {
+    usedPercentage = 100;
+  }
+  if (remainingPercentage < 0) {
+    remainingPercentage = 0;
+  }
+
   const res = {
     success: true,
     initialDiff,
     isPresent: !!f_in,
     isOnline: entries.length % 2 == 1,
-    remaining: remaining > 0 ? remaining : 0,
+    remaining,
     used,
-    usedPercentage: Math.round((used / available) * 100),
-    remainingPercentage: remaining > 0 ? Math.round((remaining / available) * 100) : 0,
+    usedPercentage,
+    remainingPercentage,
     overtimeMins: remaining > 0 ? 0 : Math.abs(remaining),
   };
   console.log(res);
