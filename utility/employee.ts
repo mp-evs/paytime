@@ -103,7 +103,7 @@ export const getEmployeeStats = (emp: EmployeeMerged) => {
 
   const available = emp.preference.maxBreakInMinutes;
   const startFrom = "11:15";
-  const entries = emp.data.d.TodayPunches?.map((p) => p.PT) || [];
+  const entries = emp.data?.d?.TodayPunches?.map((p) => p.PT) || [];
   let used = 0;
   let f_in = null;
   let initialDiff = null;
