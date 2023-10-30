@@ -88,7 +88,7 @@ export const employees: Employee[] = [
   },
   {
     username: "1039",
-    password: "krupa@1039",
+    password: "emp123",
     displayName: "Krupali Gajera",
     preference: {
       withLunch: false,
