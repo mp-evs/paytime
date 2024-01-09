@@ -1,5 +1,6 @@
 import axios from "axios";
-import { EmployeeMerged } from "@/interfaces/employee";
+import { EmployeeMerged, EmployeeMerged_V2 } from "@/interfaces/employee";
+import { getOfficialInTime, getOfficialOutTime, getTimeAllocation, isInside, makeFutureTime, toTime } from ".";
 
 export const login = async (data: any) => {
   try {
@@ -144,4 +145,93 @@ export const getEmployeeStats = (emp: EmployeeMerged) => {
   };
   console.log(res);
   return res;
+};
+
+export const getEmployeeStats_V2 = (emp: EmployeeMerged_V2) => {
+  if (!emp.data) {
+    return {
+      success: false,
+      isOnline: null,
+      isPresent: null,
+    };
+  }
+
+  const { balance, insideHoursRequired } = getTimeAllocation(emp);
+  const logs = emp.data?.d?.TodayPunches?.map((p) => p.PT) || [];
+  const timestamps = logs.map(toTime);
+  const future = makeFutureTime();
+  const officialInTime = getOfficialInTime();
+  const officialOutTime = getOfficialOutTime();
+
+  const entryPoint = Math.max(officialInTime, timestamps[0]);
+  let used = 0;
+  for (let i = 2; i < timestamps.length; i += 2) {
+    used += timestamps[i] - timestamps[i - 1];
+  }
+  let lateBy = 0;
+  if (emp.dayType == "FULL" && entryPoint > officialInTime) {
+    lateBy = entryPoint - officialInTime;
+  }
+
+  let totalSpent;
+  if (isInside(timestamps)) {
+    totalSpent = future - entryPoint;
+  } else {
+    totalSpent = timestamps[timestamps.length - 1] - entryPoint;
+  }
+
+  let insideHours = totalSpent - used;
+  let remainingToWork = insideHoursRequired - insideHours;
+  let available = balance - used - lateBy;
+
+  if (available < 0) available = 0;
+  if (remainingToWork < 0) remainingToWork = 0;
+
+  let calculatedOut = future + remainingToWork;
+  let extra = insideHours - insideHoursRequired;
+  if (!isInside(timestamps) && remainingToWork == 0) {
+    // this is where work is completed and checking AFTER signing out.
+    const diff = future - timestamps[timestamps.length - 1];
+    if (diff > 0) {
+      extra += diff;
+    }
+  }
+  if (extra > 0) {
+    calculatedOut -= extra;
+  }
+
+  // doesn't matter if you use break or not (how unfair!)
+  if (emp.dayType == "FULL") {
+    calculatedOut = Math.max(calculatedOut, officialOutTime);
+  }
+
+  /**
+   * this means person is outside, on full day and completed required hrs
+   * but did not follow unfair case.
+   */
+  if (
+    emp.dayType == "FULL" &&
+    !isInside(timestamps) &&
+    remainingToWork == 0 &&
+    timestamps[timestamps.length - 1] < officialOutTime
+  ) {
+    const pending = officialOutTime - timestamps[timestamps.length - 1];
+    calculatedOut = future + pending;
+  }
+
+  return {
+    success: true,
+    isOnline: timestamps.length % 2 == 1,
+    isPresent: timestamps.length > 0,
+    requiredHrs: insideHoursRequired,
+    available,
+    balance,
+    used,
+    lateBy,
+    insideHours,
+    remainingToWork,
+    progress: (insideHours / insideHoursRequired) * 100,
+    pending: (remainingToWork / insideHoursRequired) * 100,
+    outTime: new Date(calculatedOut).toLocaleTimeString()?.toLocaleLowerCase(),
+  };
 };

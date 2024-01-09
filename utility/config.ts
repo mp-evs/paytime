@@ -1,4 +1,4 @@
-import { Employee } from "@/interfaces/employee";
+import { Employee, Employee_V2 } from "@/interfaces/employee";
 
 export const company = {
   Code: "1",
@@ -121,5 +121,75 @@ export const employees: Employee[] = [
       withLunch: true,
       maxBreakInMinutes: 45,
     },
+  },
+];
+
+export const employees_v2: Employee_V2[] = [
+  {
+    username: "1025",
+    displayName: "Sahil Patel",
+    dayType: "FULL",
+    preference: "WOL",
+  },
+  {
+    username: "1032",
+    displayName: "Mit Pancholi",
+    avatar: "https://api.dicebear.com/6.x/adventurer/svg?seed=Midnight",
+    preference: "WL",
+    dayType: "FULL",
+  },
+  {
+    username: "1003",
+    displayName: "Ronak Patel",
+    preference: "WL",
+    dayType: "FULL",
+  },
+  {
+    username: "1026",
+    displayName: "Parekh Riddhi",
+    dayType: "FULL",
+    preference: "WL",
+  },
+  {
+    username: "1027",
+    displayName: "Nimisha Patel",
+    dayType: "FULL",
+    preference: "WL",
+  },
+  {
+    username: "1006",
+    displayName: "Dharmesh Patel",
+    dayType: "FULL",
+    preference: "WL",
+  },
+  {
+    username: "1036",
+    dayType: "FULL",
+    displayName: "Shreya Vyas",
+    preference: "WL",
+  },
+  {
+    username: "1039",
+    displayName: "Krupali Gajera",
+    dayType: "FULL",
+    preference: "WOL",
+  },
+  {
+    username: "1042",
+    displayName: "Bhaumik Patel",
+    dayType: "FULL",
+    preference: "WL",
+  },
+  {
+    username: "1043",
+    displayName: "Bhuva Bhavin",
+    dayType: "FULL",
+    preference: "WOL",
+  },
+  {
+    username: "1047",
+    displayName: "Bhumika",
+    dayType: "FULL",
+    preference: "WL",
   },
 ];

@@ -1,9 +1,20 @@
+type DayType = "HALF" | "FULL";
+type Pref = "WL" | "WOL";
+
 export interface Employee {
   username: string;
   password: string;
   displayName: string;
   avatar?: string;
   preference: EmployeeWithLunch | EmployeeWithoutLunch;
+}
+
+export interface Employee_V2 {
+  username: string;
+  displayName: string;
+  avatar?: string;
+  preference: Pref;
+  dayType: DayType;
 }
 
 export type EmployeeWithLunch = {
@@ -41,5 +52,9 @@ export interface TodayStatus {
 }
 
 export interface EmployeeMerged extends Employee {
+  data: EmployeeResponse;
+}
+
+export interface EmployeeMerged_V2 extends Employee_V2 {
   data: EmployeeResponse;
 }
