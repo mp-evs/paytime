@@ -1,6 +1,6 @@
 const NoRecords = () => {
   return (
-    <div className="flex h-[199px] w-full flex-col items-center justify-center gap-4 rounded-b-2xl border-t border-slate-900/10 bg-amber-50 py-10 dark:border-slate-300/10 dark:bg-transparent">
+    <div className="flex h-[199px] w-full flex-col items-center justify-center gap-4 rounded-b-2xl border-slate-900/10 bg-amber-50 py-10 dark:border-slate-300/10 dark:bg-transparent">
       <svg className="h-20 w-20 text-amber-700 dark:text-amber-400" viewBox="0 0 24 24" fill="none">
         <g strokeWidth="0"></g>
         <g strokeLinecap="round" strokeLinejoin="round"></g>

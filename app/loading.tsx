@@ -1,18 +1,22 @@
-import CardSkeleton from "@/components/CardSkeleton";
-import { employees } from "@/utility/config";
+import Navbar from "@/components/Navbar";
 
 export default function Loading() {
   return (
     <>
-      <nav className="sticky top-0 z-40 h-16 w-full border-b border-slate-900/10 bg-white p-3 dark:border-slate-300/10 dark:bg-slate-900"></nav>
-      <main className="mx-auto my-16 max-w-6xl px-4">
+      <Navbar />
+      <main className="mx-auto my-16 max-w-2xl px-4">
         <h2 className="mx-auto mb-4 h-12 w-1/3 animate-pulse rounded-full bg-zinc-300 dark:bg-gray-600" />
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {Array(employees.length)
-            .fill(0)
-            .map((_, i) => (
-              <CardSkeleton key={i} />
-            ))}
+        <div className="h-[400px] rounded-2xl border-2 border-zinc-300 dark:border-0 dark:bg-slate-800">
+          <div className="flex items-center justify-between border-b border-slate-900/10 p-4 dark:border-slate-300/10">
+            <div className="flex w-full items-center">
+              <div className="h-12 w-14 animate-pulse rounded-full bg-zinc-300 dark:bg-gray-600"></div>
+              <div className="ml-4 w-full">
+                <h3 className="mb-2 h-4 w-1/3 animate-pulse rounded-full bg-zinc-300 dark:bg-gray-600"></h3>
+                <h5 className="h-4 w-1/2 animate-pulse rounded-full bg-zinc-300 dark:bg-gray-600"></h5>
+              </div>
+            </div>
+            <div className="h-8 w-24 animate-pulse rounded-lg bg-zinc-300 dark:bg-gray-600"></div>
+          </div>
         </div>
       </main>
     </>

@@ -8,14 +8,22 @@ export const toTime = (punch: string) => {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate(), hour, minute).getTime();
 };
 
-export const readTime = (diff: number) => {
+export const readTime = (diff: number, style: "long" | "short" = "short") => {
+  let dayStyle = "D";
+  let hoursStyle = "H";
+  let minutesStyle = "M";
+  if (style == "long") {
+    dayStyle = "Days";
+    hoursStyle = "Hours";
+    minutesStyle = "Minutes";
+  }
   const days = Math.floor(diff / (24 * 60 * 60 * 1000));
   const hours = Math.floor((diff % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
   const minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
 
-  const dayString = days > 0 ? `${days} D, ` : "";
-  const hourString = hours > 0 ? `${hours} H, ` : "";
-  const minuteString = `${minutes} M`;
+  const dayString = days > 0 ? `${days} ${dayStyle}, ` : "";
+  const hourString = hours > 0 ? `${hours} ${hoursStyle}, ` : "";
+  const minuteString = `${minutes} ${minutesStyle}`;
   return `${dayString}${hourString}${minuteString}`;
 };
 

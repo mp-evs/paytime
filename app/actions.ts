@@ -25,7 +25,7 @@ export async function handleUser(data: any) {
       value: encoded,
       httpOnly: true,
       path: "/",
-      expires: Date.now() + 15 * 60 * 1000,
+      expires: Date.now() + 24 * 60 * 60 * 1000,
     });
     return {
       success: true,
@@ -36,4 +36,8 @@ export async function handleUser(data: any) {
       message: "An error occurred while processing your request.",
     };
   }
+}
+
+export async function signOut() {
+  cookies().delete("user");
 }
