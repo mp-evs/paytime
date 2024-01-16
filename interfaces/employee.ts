@@ -57,4 +57,5 @@ export interface EmployeeMerged extends Employee {
 
 export interface EmployeeMerged_V2 extends Employee_V2 {
   data: EmployeeResponse;
+  pendingConfig: boolean;
 }

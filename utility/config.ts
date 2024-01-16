@@ -21,6 +21,26 @@ $employees[] = ['name'=>'Krupali Gajera', 'username'=>'1039', 'pass'=>'krupa@103
 
  */
 
+export const userCardOptions = [
+  {
+    label: "Full Day",
+    value: "FULL",
+  },
+  {
+    label: "Half Day",
+    value: "HALF",
+  },
+  {
+    label: "View Punches",
+    value: "VIEW",
+  },
+];
+
+export const chartDarkOuter = ["#3b82f6", "#1e3a8a"];
+export const chartDarkInner = ["#e11d48", "#365314", "#16a34a"];
+export const chartLightOuter = ["#818cf8", "#a5b4fc"];
+export const chartLightInner = ["#fb7185", "#34d399", "#4ade80"];
+
 export const employees: Employee[] = [
   {
     username: "IN1025",
