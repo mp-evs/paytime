@@ -19,7 +19,7 @@ async function getData() {
 
   const userInfo = employees_v2.find((e) => e.username == username);
   const result: EmployeeResponse = await loginAndGetPunches(prepareLoginPayload({ username, password }));
-  const pendingConfig = Array.isArray(result.d.TodayPunches) && !userInfo;
+  const pendingConfig = Array.isArray(result.d?.TodayPunches) && !userInfo;
   return { ...userInfo, data: result, pendingConfig } as EmployeeMerged_V2;
 }
 
