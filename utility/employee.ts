@@ -109,7 +109,9 @@ export const getEmployeeStats = (emp: EmployeeMerged) => {
   const entries =
     emp.data?.d?.TodayStatus?.map((ts) => {
       return [ts.IT, ts.OT];
-    })?.flat()?.filter((s) => punchRegex.test(s)) || [];
+    })
+      ?.flat()
+      ?.filter((s) => punchRegex.test(s)) || [];
 
   entries.sort();
   let used = 0;
