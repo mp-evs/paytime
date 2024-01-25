@@ -6,6 +6,8 @@ export const company = {
   Sic: "evoort3",
 };
 
+export const punchRegex = /\b(?:[01]\d|2[0-3]):[0-5]\d\b/;
+
 /**
  * $employees[] = ['name'=>'Bhavik Akbari', 'username'=>'1015', 'pass'=>'emp123'];
 $employees[] = ['name'=>'Ketan Pansuriya', 'username'=>'1009', 'pass'=>'emp123'];
