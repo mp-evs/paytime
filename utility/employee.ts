@@ -1,6 +1,7 @@
 import axios from "axios";
 import { EmployeeMerged, EmployeeMerged_V2 } from "@/interfaces/employee";
 import { getOfficialInTime, getOfficialOutTime, getTimeAllocation, isInside, makeFutureTime, toTime } from ".";
+import { punchRegex } from "./config";
 
 export const login = async (data: any) => {
   try {
@@ -104,7 +105,13 @@ export const getEmployeeStats = (emp: EmployeeMerged) => {
 
   const available = emp.preference.maxBreakInMinutes;
   const startFrom = "11:15";
-  const entries = emp.data?.d?.TodayPunches?.map((p) => p.PT) || [];
+  // const entries = emp.data?.d?.TodayPunches?.map((p) => p.PT) || [];
+  const entries =
+    emp.data?.d?.TodayStatus?.map((ts) => {
+      return [ts.IT, ts.OT];
+    })?.flat()?.filter((s) => punchRegex.test(s)) || [];
+
+  entries.sort();
   let used = 0;
   let f_in = null;
   let initialDiff = null;
