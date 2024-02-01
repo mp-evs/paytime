@@ -57,8 +57,8 @@ export const employees: Employee[] = [
     password: "8102",
     displayName: "Parekh Riddhi (*_*)",
     preference: {
-      withLunch: true,
-      maxBreakInMinutes: 45,
+      withLunch: false,
+      maxBreakInMinutes: 75,
     },
   },
   {
@@ -66,8 +66,8 @@ export const employees: Employee[] = [
     password: "emp123",
     displayName: "Nimisha Patel",
     preference: {
-      withLunch: true,
-      maxBreakInMinutes: 45,
+      withLunch: false,
+      maxBreakInMinutes: 75,
     },
   },
   {
@@ -84,8 +84,8 @@ export const employees: Employee[] = [
     password: "emp123",
     displayName: "Shreya Vyas",
     preference: {
-      withLunch: true,
-      maxBreakInMinutes: 45,
+      withLunch: false,
+      maxBreakInMinutes: 75,
     },
   },
   {
