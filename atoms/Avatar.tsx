@@ -8,6 +8,7 @@ interface AvatarProps {
   size?: number;
   classes?: {
     active?: string;
+    initials?: string;
   };
 }
 
@@ -55,7 +56,9 @@ const Avatar: React.FC<AvatarProps> = ({ src, name, isOnline, size = 60, classes
       className="relative inline-flex items-center justify-center overflow-hidden overflow-visible rounded-full bg-gray-200 dark:bg-gray-600"
       style={{ width: size, height: size }}
     >
-      <span className="text-5xl font-bold text-gray-600 dark:text-gray-300">{getNameInitials(name)}</span>
+      <span className={`font-bold text-gray-600 dark:text-gray-300 ${classes?.initials || ""}`}>
+        {getNameInitials(name)}
+      </span>
       {tooltipComp}
     </div>
   );

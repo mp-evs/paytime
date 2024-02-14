@@ -97,7 +97,7 @@ const SuperCard: React.FC<SuperCardProps> = ({ resp }) => {
             name={resp.displayName}
             src={resp.avatar}
             isOnline={analytics.isOnline}
-            classes={{ active: "h-3 w-3 bottom-1 right-0" }}
+            classes={{ active: "h-3 w-3 bottom-1 right-0", initials: "text-2xl" }}
           />
           <div className="ml-4">
             <h3 className="text-lg font-bold sm:text-xl">{resp.displayName}</h3>
