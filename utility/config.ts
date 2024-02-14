@@ -241,4 +241,22 @@ export const employees_v2: Employee_V2[] = [
     dayType: "FULL",
     preference: "WL",
   },
+  {
+    username: "IN1051",
+    displayName: "Nikhil Makeshwar",
+    dayType: "FULL",
+    preference: "WL",
+  },
+  {
+    username: "IN1052",
+    displayName: "Rajvi Patel",
+    dayType: "FULL",
+    preference: "WL",
+  },
+  {
+    username: "IN1053",
+    displayName: "Jay Patel",
+    dayType: "FULL",
+    preference: "WL",
+  },
 ];

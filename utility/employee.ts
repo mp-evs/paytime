@@ -166,7 +166,13 @@ export const getEmployeeStats_V2 = (emp: EmployeeMerged_V2) => {
   }
 
   const { balance, insideHoursRequired } = getTimeAllocation(emp);
-  const logs = emp.data?.d?.TodayPunches?.map((p) => p.PT) || [];
+  const logs =
+    emp.data?.d?.TodayStatus?.map((ts) => {
+      return [ts.IT, ts.OT];
+    })
+      ?.flat()
+      ?.filter((s) => punchRegex.test(s)) || [];
+
   const timestamps = logs.map(toTime);
   const future = makeFutureTime();
   const officialInTime = getOfficialInTime();
