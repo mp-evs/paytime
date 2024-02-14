@@ -144,6 +144,33 @@ export const employees: Employee[] = [
       maxBreakInMinutes: 45,
     },
   },
+  {
+    username: "IN1051",
+    password: "nikhil2407",
+    displayName: "Nikhil Makeshwar",
+    preference: {
+      withLunch: true,
+      maxBreakInMinutes: 45,
+    },
+  },
+  {
+    username: "IN1052",
+    password: "rajvi3322",
+    displayName: "Rajvi Patel",
+    preference: {
+      withLunch: true,
+      maxBreakInMinutes: 45,
+    },
+  },
+  {
+    username: "IN1053",
+    password: "2112",
+    displayName: "Jay Patel",
+    preference: {
+      withLunch: true,
+      maxBreakInMinutes: 45,
+    },
+  },
 ];
 
 export const employees_v2: Employee_V2[] = [
