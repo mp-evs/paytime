@@ -22,8 +22,8 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated = false }) => {
     setIsMounted(true);
   }, []);
 
-  const handleClick = () => {
-    signOut();
+  const handleClick = async () => {
+    await signOut();
     r.push("/login");
   };
 
