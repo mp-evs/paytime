@@ -54,19 +54,19 @@ export const employees_v2: Employee_V2[] = [
     username: "IN1026",
     displayName: "Parekh Riddhi",
     dayType: "FULL",
-    preference: "WL",
+    preference: "WOL",
   },
   {
     username: "IN1027",
     displayName: "Nimisha Patel",
     dayType: "FULL",
-    preference: "WL",
+    preference: "WOL",
   },
   {
     username: "IN1036",
     dayType: "FULL",
     displayName: "Shreya Vyas",
-    preference: "WL",
+    preference: "WOL",
   },
   {
     username: "IN1039",
