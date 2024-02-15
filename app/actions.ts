@@ -19,7 +19,10 @@ export async function handleUser(data: any) {
     }
 
     // save user securely and redirect
-    const encoded = crypto.AES.encrypt(data.username + "::" + data.password, "why_do_we_fall_bruce").toString();
+    const encoded = crypto.AES.encrypt(
+      data.username + "::" + data.password,
+      process.env.BCRYPT_SALT as string
+    ).toString();
     cookies().set({
       name: "user",
       value: encoded,

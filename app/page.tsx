@@ -14,7 +14,7 @@ async function getData() {
   const userEncoded = list.get("user")?.value;
   if (!userEncoded) return redirect("/");
 
-  const bytes = crypto.AES.decrypt(userEncoded, "why_do_we_fall_bruce");
+  const bytes = crypto.AES.decrypt(userEncoded, process.env.BCRYPT_SALT as string);
   const [username, password] = bytes.toString(crypto.enc.Utf8)?.split("::");
   let userInvalid = false;
 
