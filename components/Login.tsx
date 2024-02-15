@@ -28,6 +28,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<IUser>({ defaultValues, mode: "all", resolver: yupResolver(userSchema) });
 
@@ -37,6 +38,7 @@ const Login = () => {
 
     if (!res.success) {
       setError(res.message);
+      setValue("password", "");
     } else {
       r.push("/");
     }
