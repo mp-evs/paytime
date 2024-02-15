@@ -5,6 +5,11 @@ interface AvatarProps {
   src?: string;
   name: string;
   isOnline: boolean | null;
+  size?: number;
+  classes?: {
+    active?: string;
+    initials?: string;
+  };
 }
 
 function getNameInitials(name: string) {
@@ -18,11 +23,13 @@ function getNameInitials(name: string) {
   return initials;
 }
 
-const Avatar: React.FC<AvatarProps> = ({ src, name, isOnline }) => {
+const Avatar: React.FC<AvatarProps> = ({ src, name, isOnline, size = 60, classes }) => {
   const tooltipComp = isOnline ? (
-    <div className="absolute bottom-2 right-2 h-4 w-4 rounded-full bg-sky-400">
+    <div className={`absolute rounded-full bg-sky-400 ${classes?.active || "h-4 w-4"}`}>
       <div className="group relative h-full w-full">
-        <span className="pointer-events-none absolute left-6 w-max rounded border border-slate-900/10 px-2 py-1 text-sm font-medium text-gray-600 opacity-0 shadow-lg transition-opacity group-hover:opacity-100 dark:border-0 dark:bg-slate-900/75 dark:text-white">
+        <span
+          className={`pointer-events-none absolute left-6 z-10 w-max rounded border border-slate-900/10 px-2 py-1 text-sm font-medium text-gray-600 opacity-0 shadow-lg transition-opacity group-hover:opacity-100 dark:border-0 dark:bg-slate-900/75 dark:text-white`}
+        >
           Online
         </span>
       </div>
@@ -33,10 +40,10 @@ const Avatar: React.FC<AvatarProps> = ({ src, name, isOnline }) => {
     return (
       <div className="relative">
         <Image
-          className="h-28 w-28 rounded-full bg-gray-200 dark:bg-gray-600"
+          className="rounded-full bg-gray-200 dark:bg-gray-600"
           src={src}
-          width={60}
-          height={60}
+          width={size}
+          height={size}
           alt="avatar"
           priority
         />
@@ -45,8 +52,13 @@ const Avatar: React.FC<AvatarProps> = ({ src, name, isOnline }) => {
     );
   }
   return (
-    <div className="relative inline-flex h-28 w-28 items-center justify-center overflow-hidden overflow-visible rounded-full bg-gray-200 dark:bg-gray-600">
-      <span className="text-5xl font-bold text-gray-600 dark:text-gray-300">{getNameInitials(name)}</span>
+    <div
+      className="relative inline-flex items-center justify-center overflow-hidden overflow-visible rounded-full bg-gray-200 dark:bg-gray-600"
+      style={{ width: size, height: size }}
+    >
+      <span className={`font-bold text-gray-600 dark:text-gray-300 ${classes?.initials || ""}`}>
+        {getNameInitials(name)}
+      </span>
       {tooltipComp}
     </div>
   );

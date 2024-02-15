@@ -21,7 +21,13 @@ const Card: React.FC<CardProps> = ({ _rawData, onAction }) => {
 
   return (
     <div className="dark:bg-navy relative flex w-full flex-col items-center gap-2 rounded-2xl border-2 border-zinc-300 pt-4 dark:border-0 dark:bg-slate-800">
-      <Avatar name={_rawData.displayName} src={_rawData.avatar} isOnline={states.isOnline} />
+      <Avatar
+        name={_rawData.displayName}
+        src={_rawData.avatar}
+        isOnline={states.isOnline}
+        size={100}
+        classes={{ active: "h-4 w-4 bottom-1 right-2" }}
+      />
 
       <button
         onClick={() => onAction(_rawData.username)}
