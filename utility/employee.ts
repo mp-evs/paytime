@@ -6,6 +6,9 @@ import { punchRegex } from "./config";
 export const login = async (data: any) => {
   try {
     const result = await axios.post("http://paytime.mantratecapp.com/UserForms/Login.aspx/LoginUser", data);
+    if (result.data.d != "SuccessLogin") {
+      return null;
+    }
     const cookie = result.headers["set-cookie"] || null;
     return cookie;
   } catch (e: any) {
@@ -47,7 +50,7 @@ export const loginAndGetPunches = async (data: any) => {
   if (cookie) {
     return await getPunches(cookie);
   }
-  return {};
+  return null;
 };
 
 const calculateTimeDifference = (startTime: string, endTime: string) => {

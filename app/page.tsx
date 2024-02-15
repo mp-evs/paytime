@@ -16,6 +16,7 @@ async function getData() {
 
   const bytes = crypto.AES.decrypt(userEncoded, "why_do_we_fall_bruce");
   const [username, password] = bytes.toString(crypto.enc.Utf8)?.split("::");
+  let userInvalid = false;
 
   const defaultInfo: Employee_V2 = {
     displayName: "Crawling Gryphon",
@@ -26,8 +27,7 @@ async function getData() {
 
   const userInfo = employees_v2.find((e) => e.username == username);
   const result: EmployeeResponse = await loginAndGetPunches(prepareLoginPayload({ username, password }));
-  // const pendingConfig = Array.isArray(result.d?.TodayPunches) && !userInfo;
-  return { data: result, ...(userInfo || defaultInfo) } as EmployeeMerged_V2;
+  return { data: result, ...(userInfo || defaultInfo), userInvalid } as EmployeeMerged_V2;
 }
 
 export default async function Home() {

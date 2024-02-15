@@ -5,6 +5,7 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const cookieStore = cookies();
   const user = cookieStore.get("user");
+  if (user && request.nextUrl.pathname == "/login") return NextResponse.redirect(new URL("/", request.url));
   if (!user && request.nextUrl.pathname != "/login") return NextResponse.redirect(new URL("/login", request.url));
   return NextResponse.next();
 }

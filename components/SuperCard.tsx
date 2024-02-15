@@ -3,10 +3,11 @@
 import Avatar from "@/atoms/Avatar";
 import { EmployeeMerged_V2 } from "@/interfaces/employee";
 import { getEmployeeStats_V2 } from "@/utility/employee";
-import { Fragment, useMemo, useState } from "react";
-import { Dialog, Listbox, Transition } from "@headlessui/react";
+import { Fragment, useEffect, useMemo, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 import NoRecords from "@/atoms/NoRecords";
 import * as charts from "echarts/core";
+import { useRouter } from "next/navigation";
 import { TooltipComponent, TitleComponent, GridComponent } from "echarts/components";
 import { PieChart } from "echarts/charts";
 import ReactEChartsCore from "echarts-for-react/lib/core";
@@ -16,6 +17,7 @@ import { useTheme } from "next-themes";
 import PunchTable from "./PunchTable";
 import { chartDarkInner, chartDarkOuter, chartLightInner, chartLightOuter, userCardOptions } from "@/utility/config";
 import UserCardDropdown from "./UserCardDropdown";
+import { signOut } from "@/app/actions";
 
 charts.use([TitleComponent, TooltipComponent, GridComponent, PieChart, SVGRenderer]);
 
@@ -28,9 +30,19 @@ const SuperCard: React.FC<SuperCardProps> = ({ resp }) => {
   const [chartIsReady, setChartIsReady] = useState(false);
   const [selected, setSelected] = useState(userCardOptions[0]);
   const { theme } = useTheme();
+  const r = useRouter();
   const analytics = useMemo(() => {
     return getEmployeeStats_V2(selected.value == "FULL" ? resp : { ...resp, dayType: "HALF" });
   }, [resp, selected.value]);
+
+  useEffect(() => {
+    (async () => {
+      if (!resp.data) {
+        await signOut();
+        r.push("/login");
+      }
+    })();
+  }, [r, resp.data]);
 
   const modalContent = analytics.isPresent ? (
     <Transition appear show={open} as={Fragment}>
