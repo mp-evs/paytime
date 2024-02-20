@@ -102,12 +102,12 @@ export const employees_v2: Employee_V2[] = [
     username: "IN1052",
     displayName: "Rajvi Patel",
     dayType: "FULL",
-    preference: "WL",
+    preference: "WOL",
   },
   {
     username: "IN1053",
     displayName: "Jay Patel",
     dayType: "FULL",
-    preference: "WL",
+    preference: "WOL",
   },
 ];
