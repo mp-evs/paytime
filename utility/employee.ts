@@ -250,6 +250,7 @@ export const getEmployeeStats_V2 = (emp: EmployeeMerged_V2) => {
     remainingToWork,
     progress: (insideHours / insideHoursRequired) * 100,
     pending: (remainingToWork / insideHoursRequired) * 100,
-    outTime: new Date(calculatedOut).toLocaleTimeString()?.toLocaleLowerCase(),
+    outTime: new Date(calculatedOut).toLocaleTimeString("en-US")?.toLocaleLowerCase(),
+    isOvertime: calculatedOut > officialOutTime,
   };
 };

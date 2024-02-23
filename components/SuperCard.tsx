@@ -115,7 +115,16 @@ const SuperCard: React.FC<SuperCardProps> = ({ resp }) => {
             <h3 className="text-lg font-bold sm:text-xl">{resp.displayName}</h3>
             {analytics.isPresent && (
               <h5 className="text-sm text-gray-700 dark:text-gray-300">
-                Sign-Out at <span className="font-bold">{analytics.outTime}</span>
+                Sign-Out at{" "}
+                <span
+                  className={`rounded px-2 py-0.5 font-bold ${
+                    analytics.isOvertime
+                      ? "bg-red-100 text-red-500 dark:bg-red-700 dark:text-white"
+                      : "bg-green-100 text-green-500 dark:bg-green-700 dark:text-white"
+                  }`}
+                >
+                  {analytics.outTime}
+                </span>
               </h5>
             )}
           </div>
