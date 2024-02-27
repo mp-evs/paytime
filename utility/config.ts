@@ -110,4 +110,10 @@ export const employees_v2: Employee_V2[] = [
     dayType: "FULL",
     preference: "WOL",
   },
+  {
+    username: "IN1054",
+    displayName: "Yash Bhadani",
+    dayType: "FULL",
+    preference: "WL",
+  },
 ];
