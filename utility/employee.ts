@@ -176,7 +176,7 @@ export const getEmployeeStats_V2 = (emp: EmployeeMerged_V2) => {
       ?.flat()
       ?.filter((s) => punchRegex.test(s)) || [];
 
-  const timestamps = logs.map(toTime).filter((l) => l >= getOfficialInTime());
+  const timestamps = logs.map(toTime);
   const future = makeFutureTime();
   const officialInTime = getOfficialInTime();
   const officialOutTime = getOfficialOutTime();
