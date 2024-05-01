@@ -60,7 +60,7 @@ export const employees_v2: Employee_V2[] = [
     username: "IN1027",
     displayName: "Nimisha Patel",
     dayType: "FULL",
-    preference: "WOL",
+    preference: "WL",
   },
   {
     username: "IN1036",
