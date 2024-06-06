@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import mysql, { Connection } from "mysql2";
 import { readFileSync } from "fs";
 import { Client } from "ssh2";
@@ -25,7 +24,7 @@ const forwardConfig = {
   dstPort: dbServer.port,
 };
 
-export const getUserPunchesQuery = (id: number, date: Date) => {
+const getUserPunchesQuery = (id: number, date: Date) => {
   id = 1025;
   date = new Date(2024, 4, 25);
   const dateString = date.toISOString().split("T")?.[0];
