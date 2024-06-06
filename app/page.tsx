@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import { EmployeeMerged_V2, EmployeeResponse, Employee_V2 } from "@/interfaces/employee";
-import { loginAndGetPunches, prepareLoginPayload } from "@/utility/employee";
+import { getPunches_DB, prepareLoginPayload } from "@/utility/employee";
 import { cookies } from "next/headers";
 import crypto from "crypto-js";
 import { redirect } from "next/navigation";
@@ -26,7 +26,7 @@ async function getData() {
   };
 
   const userInfo = employees_v2.find((e) => e.username == username);
-  const result: EmployeeResponse = await loginAndGetPunches(prepareLoginPayload({ username, password }));
+  const result: EmployeeResponse | null = await getPunches_DB(prepareLoginPayload({ username, password }));
   return { data: result, ...(userInfo || defaultInfo), userInvalid } as EmployeeMerged_V2;
 }
 

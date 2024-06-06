@@ -1,6 +1,14 @@
 import axios from "axios";
-import { EmployeeMerged, EmployeeMerged_V2 } from "@/interfaces/employee";
-import { getOfficialInTime, getOfficialOutTime, getTimeAllocation, isInside, makeFutureTime, toTime } from ".";
+import { EmployeeMerged, EmployeeMerged_V2, EmployeeResponse } from "@/interfaces/employee";
+import {
+  getOfficialInTime,
+  getOfficialOutTime,
+  getTimeAllocation,
+  isInside,
+  makeFutureTime,
+  readTime,
+  toTime,
+} from ".";
 import { punchRegex } from "./config";
 
 export const login = async (data: any) => {
@@ -51,6 +59,49 @@ export const loginAndGetPunches = async (data: any) => {
     return await getPunches(cookie);
   }
   return null;
+};
+
+export const getPunches_DB = async (data: any) => {
+  if (!data.username) return {} as EmployeeResponse;
+  try {
+    const baseUrl =
+      process.env.NODE_ENV == "development" ? "http://localhost:3000" : "https://paytime-three.vercel.app";
+    const uid = data.username.replace("IN", "");
+    const result = await fetch(`${baseUrl}/api/user/${uid}/punches`).then((r) => r.json());
+
+    const TodayStatus = [];
+    for (let i = 0; i < (result.data || []).length; i += 2) {
+      const first = result.data[i]?.time?.replace(":00", "");
+      const second = result.data[i + 1]?.time?.replace(":00", "");
+      let diff = 0;
+      if (first && second) {
+        const ts = [first, second].map(toTime);
+        diff = ts[1] - ts[0];
+      }
+      TodayStatus.push({
+        AD: "NA",
+        IT: first || "-",
+        OT: second || "-",
+        S: "",
+        WH: diff > 0 ? readTime(diff) : "-",
+      });
+    }
+    const r = {
+      d: {
+        __type: "MANUAL",
+        ErrorCode: "NA",
+        ErrorDescription: "NA",
+        TodayPunches: (result.data || []).map((d: any) => ({
+          PT: (d.time as string).replace(":00", ""),
+        })),
+        TodayStatus,
+      },
+    } as EmployeeResponse;
+    return r;
+  } catch (e: any) {
+    console.log(e);
+    return {} as EmployeeResponse;
+  }
 };
 
 const calculateTimeDifference = (startTime: string, endTime: string) => {
@@ -155,7 +206,6 @@ export const getEmployeeStats = (emp: EmployeeMerged) => {
     remainingPercentage,
     overtimeMins: remaining > 0 ? 0 : Math.abs(remaining),
   };
-  console.log(res);
   return res;
 };
 
@@ -169,12 +219,14 @@ export const getEmployeeStats_V2 = (emp: EmployeeMerged_V2) => {
   }
 
   const { balance, insideHoursRequired } = getTimeAllocation(emp);
-  const logs =
-    emp.data?.d?.TodayStatus?.map((ts) => {
-      return [ts.IT, ts.OT];
-    })
-      ?.flat()
-      ?.filter((s) => punchRegex.test(s)) || [];
+  // const logs =
+  //   emp.data?.d?.TodayStatus?.map((ts) => {
+  //     return [ts.IT, ts.OT];
+  //   })
+  //     ?.flat()
+  //     ?.filter((s) => punchRegex.test(s)) || [];
+
+  const logs = emp.data?.d?.TodayPunches?.map((ts) => ts.PT)?.filter((s) => punchRegex.test(s)) || [];
 
   const timestamps = logs.map(toTime);
   const future = makeFutureTime();
