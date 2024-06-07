@@ -1,5 +1,4 @@
 import mysql, { Connection } from "mysql2";
-import { readFileSync } from "fs";
 import { Client } from "ssh2";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -15,7 +14,7 @@ const tunnelConfig = {
   host: process.env.DB_SSH_HOST,
   port: 22,
   username: process.env.DB_SSH_USER,
-  privateKey: readFileSync("C:\\Users\\MitPancholi\\.ssh\\staging_ssh_shell_access"),
+  privateKey: Buffer.from(process.env.SSH_KEY as string),
 };
 const forwardConfig = {
   srcHost: "127.0.0.1",
@@ -25,8 +24,6 @@ const forwardConfig = {
 };
 
 const getUserPunchesQuery = (id: number, date: Date) => {
-  id = 1025;
-  date = new Date(2024, 4, 25);
   const dateString = date.toISOString().split("T")?.[0];
   console.log(dateString);
   return `SELECT * FROM \`attendance\` a
@@ -45,7 +42,8 @@ const connectSSH = () => {
         (err, stream) => {
           if (err) {
             console.error("Failed to establish SSH connection.");
-            reject(err);}
+            reject(err);
+          }
           resolve(stream);
         }
       );
@@ -75,8 +73,10 @@ const SSHConnection = () => {
   });
 };
 
-export async function GET(request: NextRequest, params: { params: {uid: string} }) {
-  const { params: { uid } } = params;
+export async function GET(request: NextRequest, params: { params: { uid: string } }) {
+  const {
+    params: { uid },
+  } = params;
   try {
     if (!uid?.trim()) {
       return NextResponse.json({ message: "uid is required" }, { status: 400 });
