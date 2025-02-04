@@ -1,6 +1,8 @@
 import mysql, { Connection } from "mysql2";
 import { Client } from "ssh2";
 import { NextRequest, NextResponse } from "next/server";
+import crypto from "crypto-js";
+import { redirect } from "next/navigation";
 
 const sshClient = new Client();
 const dbServer = {
@@ -23,7 +25,7 @@ const forwardConfig = {
   dstPort: dbServer.port,
 };
 
-const getUserPunchesQuery = (id: number, date: Date) => {
+const getUserPunchesQuery = (id: number | string, date: Date) => {
   const dateString = date.toISOString().split("T")?.[0];
   console.log(dateString);
   return `SELECT * FROM \`attendance\` a
@@ -73,22 +75,55 @@ const SSHConnection = () => {
   });
 };
 
-export async function GET(request: NextRequest, params: { params: { uid: string } }) {
-  const {
-    params: { uid },
-  } = params;
-  try {
-    if (!uid?.trim()) {
-      return NextResponse.json({ message: "uid is required" }, { status: 400 });
-    }
-    console.log("Establishing Connection ...");
-    const conn = await SSHConnection();
+export async function GET(request: NextRequest) {
+  const userEncoded = request.cookies.get("user")?.value;
+  if (!userEncoded) return redirect("/login");
 
-    const q = getUserPunchesQuery(+uid, new Date());
-    const [raw_punches, fields] = await conn.promise().query(q);
-    return NextResponse.json({ data: raw_punches }, { status: 200 });
-  } catch (err) {
-    const { message, response } = err as any;
-    return NextResponse.json({ message }, { status: 500 });
-  }
+  const bytes = crypto.AES.decrypt(userEncoded, process.env.BCRYPT_SALT as string);
+  const [username] = bytes.toString(crypto.enc.Utf8)?.split("::");
+
+  const encoder = new TextEncoder();
+  const stream = new ReadableStream({
+    async start(controller) {
+      const sendEvent = (data: object) => {
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify(data)}\n\n`));
+      };
+      try {
+        sendEvent({
+          message: "Connecting to DB ...",
+          kind: "loading",
+        });
+        const conn = await SSHConnection();
+
+        const uid = username.replace("IN", "");
+        const q = getUserPunchesQuery(uid, new Date());
+
+        sendEvent({
+          message: "Getting your records ...",
+          kind: "loading",
+        });
+        const [raw_punches] = await conn.promise().query(q);
+        sendEvent({
+          message: `${(raw_punches as any)?.length} Records found`,
+          kind: "success",
+          data: raw_punches,
+        });
+      } catch (err) {
+        console.log(err);
+        sendEvent({
+          reason: (err as any).message,
+          message: "Something went wrong",
+          kind: "error",
+        });
+      }
+    },
+  });
+
+  return new NextResponse(stream, {
+    headers: {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      Connection: "keep-alive",
+    },
+  });
 }

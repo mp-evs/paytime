@@ -4,8 +4,8 @@ import { getPunches_DB, prepareLoginPayload } from "@/utility/employee";
 import { cookies } from "next/headers";
 import crypto from "crypto-js";
 import { redirect } from "next/navigation";
-import SuperCard from "@/components/SuperCard";
 import { employees_v2 } from "@/utility/config";
+import ConsumeEventSource from "@/components/ConsumeEventSource";
 
 export const dynamic = "force-dynamic";
 
@@ -41,7 +41,8 @@ export default async function Home() {
           {new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(new Date())}
         </h2>
 
-        <SuperCard resp={data} />
+        <ConsumeEventSource />
+        {/* <SuperCard resp={data} /> */}
       </main>
     </>
   );

@@ -35,6 +35,24 @@ const SuperCard: React.FC<SuperCardProps> = ({ resp }) => {
     return getEmployeeStats_V2(selected.value == "FULL" ? resp : { ...resp, dayType: "HALF" });
   }, [resp, selected.value]);
 
+  const [event, setEvent] = useState<Object>({
+    message: "Sending request ...",
+    kind: "loading",
+  });
+
+  useEffect(() => {
+    const eventSource = new EventSource("/api/user/punches");
+
+    eventSource.onmessage = (event) => {
+      const parsed = JSON.parse(event.data);
+      setEvent(parsed);
+    };
+
+    return () => {
+      eventSource.close();
+    };
+  }, []);
+
   useEffect(() => {
     (async () => {
       if (!resp.data) {
