@@ -149,7 +149,7 @@ export const employees_v2: Employee_V2[] = [
   {
     username: "IN1063",
     displayName: "Ansh Mehta",
-    avatar: "https://api.dicebear.com/9.x/adventurer/svg?seed=Brian%22",
+    avatar: "https://api.dicebear.com/9.x/adventurer/svg?seed=Brian",
     dayType: "FULL",
     preference: "WL",
   },
