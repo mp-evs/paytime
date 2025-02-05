@@ -140,4 +140,23 @@ export const employees_v2: Employee_V2[] = [
     dayType: "FULL",
     preference: "WL",
   },
+  {
+    username: "IN1061",
+    displayName: "Govind Sarangdevot",
+    dayType: "FULL",
+    preference: "WOL",
+  },
+  {
+    username: "IN1063",
+    displayName: "Ansh Mehta",
+    avatar: "https://api.dicebear.com/9.x/adventurer/svg?seed=Brian%22",
+    dayType: "FULL",
+    preference: "WL",
+  },
+  {
+    username: "IN1066",
+    displayName: "Vivek Panchal",
+    dayType: "FULL",
+    preference: "WOL",
+  },
 ];
